@@ -8,9 +8,10 @@ import { AUTO_LANGUAGE } from "./constants";
 import { ArrowsIcon } from "./components/Icons";
 import { LanguageSelector } from "./components/LenguageSelector";
 import { SectionType } from "./types.d";
+import { TextArea } from "./components/TextArea";
 
 function App() {
-  const { fromLanguage, toLanguage, interchangeLanguages, setFromLanguage, setToLanguage } = useStore();
+  const { loading, fromLanguage, toLanguage, fromText, result, interchangeLanguages, setFromLanguage, setToLanguage, setFromText, setResult } = useStore();
 
   return (
     <Container fluid>
@@ -24,11 +25,10 @@ function App() {
         value={fromLanguage}
         onChange={setFromLanguage} 
         />
-        <Form.Control
-        as='textarea'
-        placeholder="Introducir texto"
-        autoFocus
-        style={{height:'150px'}}
+        <TextArea
+        type={SectionType.From}
+        value={fromText}
+        onChange={setFromText}
         />
         </Stack>
         </Col>
@@ -44,10 +44,11 @@ function App() {
         value={toLanguage}
         onChange={(setToLanguage)} 
         />
-         <Form.Control
-        as='textarea'
-        placeholder="Traduccion"
-        style={{height:'150px'}}
+         <TextArea
+        type={SectionType.To}
+        value={result}
+        onChange={setResult}
+        loading={loading}
         />
         </Stack>
         </Col>
